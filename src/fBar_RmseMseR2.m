@@ -5,10 +5,14 @@
 % Read more: https://vasanza.blogspot.com/
 function [rmse,mse,r2] = fBar_RmseMseR2(yest,youtput)
     %rmse = sqrt(mean((output - yest).^2));
-    rmse = sqrt(immse(yest, youtput));
+    %rmse = sqrt(immse(yest, youtput));
+    rmse = sqrt(mean((yest-youtput).^2));
     %mse = mean((output - yest).^2);
-    mse = immse(yest, youtput);
-    r2 = fR2(youtput,yest);
+    %mse = immse(yest, youtput);
+    mse = mean((youtput - yest).^2);
+
+    %r2 = fR2(yest,youtput);
+    r2 = abs(fR2(yest,youtput));
 
     c = categorical({'RMSE','MSE','1-R2'});
     values = [rmse mse 1-r2];
